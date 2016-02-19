@@ -34,7 +34,7 @@ public class CardDeckTest {
         if (first.getValue() == 0 &&
                 second.getValue() == 1 && 
                 third.getValue() == 2 &&
-                fourth.getValue() == 4)
+                fourth.getValue() == 3)
             fail("shuffle left deck ordered");
         else if (first.getValue() == 51 &&
                 second.getValue() == 50 &&
