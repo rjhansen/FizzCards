@@ -22,13 +22,7 @@ package com.robert_hansen;
  * @author Robert J. Hansen
  */
 public class Card implements Comparable<Card> {
-    private static final String[] SUITS = new String[] 
-        { "Clubs", "Hearts", "Diamonds", "Spades"};
-    private static final String[] FACES = new String[] 
-        { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", 
-        "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
     private final int value;
-    private final String stringValue;
     
     /** Initializes a new card from a given index.
      *
@@ -44,16 +38,21 @@ public class Card implements Comparable<Card> {
         if (index < 0 || index > 51)
             throw new IllegalArgumentException();
         value = index;
-        StringBuilder sb = new StringBuilder();
-        sb.append(FACES[value % 13]);
-        sb.append(" of ");
-        sb.append(SUITS[value / 13]);
-        stringValue = sb.toString();
     }
     
     @Override
     public String toString() {
-        return stringValue;
+        final String[] SUITS = new String[] 
+        { "Clubs", "Hearts", "Diamonds", "Spades"};
+        final String[] FACES = new String[] 
+        { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", 
+        "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(FACES[value % 13]);
+        sb.append(" of ");
+        sb.append(SUITS[value / 13]);
+        return sb.toString();
     }
     
     /** Returns the ordinal value of this card.
@@ -66,22 +65,16 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        Integer left = value;
-        Integer right = o.value;
-        return left.compareTo(right);
+        return value < o.value ? -1 : value == o.value ? 0 : 1;
     }
     
     @Override
     public boolean equals(Object o) {
-        if (o.getClass() == Card.class)
-            return (0 == compareTo((Card) o));
-        return false;
+        return o.getClass() == Card.class && ((Card)o).value == value;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.value;
-        return hash;
+        return 371 + this.value;
     }    
 }

@@ -14,6 +14,9 @@
 */
 
 package com.robert_hansen;
+import java.security.SecureRandom;
+import java.util.List;
+import java.util.ArrayList;
 
 /** Represents a deck of cards.  Since a deck of cards is conceptually
  * identical to a deque of &lt;Cards&gt;, we get most of our functionality
@@ -22,8 +25,6 @@ package com.robert_hansen;
  * @author Robert J. Hansen
  */
 public class CardDeck extends java.util.ArrayDeque<Card> {
-    private final java.util.Random rng = new java.util.Random();
-    
     /** Creates a new deck of 52 cards, in normal order.
      */
     public CardDeck() {
@@ -44,10 +45,11 @@ public class CardDeck extends java.util.ArrayDeque<Card> {
      * properties and is recommended by Knuth.
      */
     public void shuffle() {
-        java.util.List<Card> beginState = new java.util.ArrayList<>(this);
+        final SecureRandom rng = new SecureRandom();
+        List<Card> beginState = new ArrayList<>(this);
         this.clear();
         while (! beginState.isEmpty()) {
-            int index = rng.nextInt(beginState.size());
+            final int index = rng.nextInt(beginState.size());
             this.push(beginState.get(index));
             beginState.remove(index);
         }
