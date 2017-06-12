@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.4.0)
+set(PACKAGE_VERSION 1.0.0)
+include(GNUInstallDirs)
+add_executable(fizzcards src/card.cc src/carddeck.cc src/main.cc)
+set_property(TARGET fizzcards PROPERTY CXX_STANDARD 14)
+set_property(TARGET fizzcards PROPERTY CXX_STANDARD_REQUIRED true)
+install(TARGETS fizzcards DESTINATION bin)
