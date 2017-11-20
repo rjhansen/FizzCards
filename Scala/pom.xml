@@ -29,6 +29,12 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <version>3.1.0</version>
+      <type>maven-plugin</type>
+    </dependency>
   </dependencies>
 
   <build>
@@ -62,6 +68,29 @@
             <include>**/*Suite.*</include>
           </includes>
         </configuration>
+      </plugin>
+      <plugin>
+	<artifactId>maven-assembly-plugin</artifactId>
+	<version>3.1.0</version>
+	<configuration>
+	  <descriptorRefs>
+	    <descriptorRef>jar-with-dependencies</descriptorRef>
+	  </descriptorRefs>
+	  <archive>
+	    <manifest>
+	      <mainClass>engineering.hansen.App</mainClass>
+	    </manifest>
+	  </archive>
+	</configuration>
+	<executions>
+	  <execution>
+	    <id>make-assembly</id>
+	    <phase>package</phase>
+	    <goals>
+	      <goal>single</goal>
+	    </goals>
+	  </execution>
+	</executions>
       </plugin>
     </plugins>
   </build>
