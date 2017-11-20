@@ -92,6 +92,26 @@
 	  </execution>
 	</executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <id>sign</id>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <keystore>${keystore.home}</keystore>
+          <alias>${keystore.alias}</alias>
+          <tsa>http://timestamp.comodoca.com</tsa>
+          <storepass>${keystore.storepass}</storepass>
+          <keypass>${keystore.keypass}</keypass>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
