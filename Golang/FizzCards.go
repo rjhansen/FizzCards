@@ -43,11 +43,9 @@ func (c Card) String() string {
 
 // Shuffle Shuffles a given Deck, returning the Deck
 func (d *Deck) Shuffle() *Deck {
-	tmpslice := make([]Card, len(d.cards))
-	for i, v := range r.Perm(len(d.cards)) {
-		tmpslice[i] = d.cards[v]
-	}
-	d.cards = tmpslice
+	rand.Shuffle(len(d.cards), func(i, j int) {
+		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
+	})
 	return d
 }
 
